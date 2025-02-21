@@ -1,0 +1,20 @@
+{
+  "name": "node_tt",
+  "version": "1.0.0",
+  "description": "this is a node_js guid",
+  "main": "assertion-testing.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon creating-servers.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariojere/Node.js.git"
+  },
+  "author": "mario jere",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariojere/Node.js/issues"
+  },
+  "homepage": "https://github.com/mariojere/Node.js#readme"
+}
