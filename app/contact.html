@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2a5298;
+            outline: none;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #2a5298;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e3c72;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            color: #4caf50;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: #ff6f61;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <div class="error-message" id="nameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Enter the subject" required>
+                <div class="error-message" id="subjectError"></div>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+                <div class="error-message" id="messageError"></div>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div class="success-message" id="successMessage">
+            Your message has been sent successfully!
+        </div>
+    </div>
+
+    <script>
+        // Form Validation and Submission
+        const contactForm = document.getElementById("contactForm");
+        const successMessage = document.getElementById("successMessage");
+
+        contactForm.addEventListener("submit", (e) => {
+            e.preventDefault(); // Prevent form submission
+
+            // Clear previous error messages
+            clearErrors();
+
+            // Validate form fields
+            let isValid = true;
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const subject = document.getElementById("subject").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (name === "") {
+                showError("nameError", "Name is required");
+                isValid = false;
+            }
+
+            if (email === "") {
+                showError("emailError", "Email is required");
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                showError("emailError", "Please enter a valid email address");
+                isValid = false;
+            }
+
+            if (subject === "") {
+                showError("subjectError", "Subject is required");
+                isValid = false;
+            }
+
+            if (message === "") {
+                showError("messageError", "Message is required");
+                isValid = false;
+            }
+
+            // If form is valid, show success message
+            if (isValid) {
+                successMessage.style.display = "block";
+                contactForm.reset(); // Clear the form
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000); // Hide success message after 3 seconds
+            }
+        });
+
+        // Helper Functions
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        function clearErrors() {
+            const errorMessages = document.querySelectorAll(".error-message");
+            errorMessages.forEach((error) => {
+                error.textContent = "";
+            });
+        }
+
+        function validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    </script>
+</body>
+</html>

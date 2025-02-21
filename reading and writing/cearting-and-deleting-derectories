@@ -1,0 +1,28 @@
+const fs = require('fs');
+
+fs.unlink("file-2.txt", (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log("file.txt was deleted");
+});
+
+fs.mkdir("new-directory", (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log("new-directory was created");
+});
+
+fs.rmdir("new-directory", (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log("new-directory was deleted");
+});
+
+fs.mkdirSync("new-directory-sync");
+fs.rmdirSync("new-directory-sync");
